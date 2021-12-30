@@ -9,9 +9,9 @@ import {restartAnimation} from "./restart-animation.js"
 const API_ENDPOINT = 'https://swapi.dev/api'
 const romanos = ["","I","II","III","IV","V","VI"]
 
-function main() {
-    try{
-        getFilms();
+async function main() {
+    try {
+        await getFilms();
     } catch {
         carregaIntro({episode_id: 0, title: 'Error!', opening_crawl: 'Jarjar binks roubou o texto!!\n Tente recarregar a pagina.'});
     }
@@ -22,8 +22,8 @@ function main() {
 }
 
 async function getFilms() {
-    const resposta = await fetch(`${API_ENDPOINT}/films/`) 
-    const dados = await resposta.json()
+    const resposta = await fetch(`${API_ENDPOINT}/films/`); 
+    const dados = await resposta.json();
     
     dados.results.sort((filmeA, filmeB) => filmeA.episode_id > filmeB.episode_id ? 1 : -1)
     
